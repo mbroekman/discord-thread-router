@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+
+- **Install with pip:** `pip install .` failed because setuptools also found `config/` and `backlog/`. Only `thread_router` is packaged now.
+
 ## [0.2.0] - 2026-11-02
 
 ### Added

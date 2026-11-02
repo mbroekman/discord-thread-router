@@ -365,7 +365,7 @@ wheels = [
 [[package]]
 name = "discord-thread-router"
 version = "0.2.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "discord-py" },
     { name = "httpx" },
