@@ -4,7 +4,7 @@ title: Kanban card action (phase 3)
 status: In Progress
 assignee: []
 created_date: '2026-11-02 13:18'
-updated_date: '2026-11-02 16:03'
+updated_date: '2026-11-02 17:36'
 labels: []
 dependencies: []
 ordinal: 4000
@@ -30,4 +30,6 @@ Add a kanban_card action that posts the thread to the aa-kanban intake endpoint 
 Action and tests done (thread_router/actions/kanban.py). Live test waits for: aa_kanban in APPS_WITH_PUBLIC_VIEWS on the server (user decision), an intake API key, rules.yaml with the 3GODS channel ids, and the container host.
 
 2026-11-02: devauth chosen as host. Code cloned to ~/discord-thread-router (79752cb), image discord-thread-router:0.2.0 built, .env (KANBAN_BASE_URL, RULES_FILE set; secrets empty) and start.sh (podman run, no compose on devauth). aa_kanban added to APPS_WITH_PUBLIC_VIEWS on devauth: intake POST without key = 401, other kanban pages still 302 to login. Waiting on: secrets in .env, Intake API key, channel ids in config/rules.yaml.
+
+2026-11-02 production (auth.3gods.space, user gameofdrones): aa-kanban 1.1.0 installed, migration 0026, collectstatic, aa_kanban in APPS_WITH_PUBLIC_VIEWS (intake 401 without key, other pages 302). Router at ~/discord-thread-router (aa35ef3, .venv, pip install .), .env with empty secrets, config/rules.yaml = example, supervisor block in thread-router.supervisor.conf (needs root to install). Old githubBOT.py runs as root (pid 1693) and must be stopped by the user.
 <!-- SECTION:NOTES:END -->
