@@ -1,5 +1,7 @@
 # Discord Thread Router
 
+<img src="assets/logo.png" alt="Discord Thread Router logo" width="128">
+
 A Discord bot that watches chosen channels. When someone opens a thread there, the bot runs the actions you set for that channel and replies in the thread with a link to the result.
 
 | Action | Result |
