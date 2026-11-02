@@ -1,0 +1,36 @@
+[project]
+name = "discord-thread-router"
+version = "0.2.0"
+description = "Discord bot that turns new threads in chosen channels into GitHub issues, discussions or aa-kanban cards."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+dependencies = [
+    "discord.py>=2.4",
+    "httpx>=0.27",
+    "python-dotenv>=1.0",
+    "pyyaml>=6.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.11",
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.6",
+    "types-pyyaml>=6.0",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+lint.select = ["E", "F", "I", "W", "B", "UP"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true

@@ -1,0 +1,20 @@
+# Copy to rules.yaml. The bot rereads this file when it changes: no restart needed.
+# Per Discord channel id (forum or text channel): one or more actions for every new thread.
+channels:
+  "123456789012345678":          # #bugs
+    - action: github_issue
+      repo: mbroekman/aa-industry
+      labels: [from-discord]     # optional
+      title_prefix: "[Issue] "   # optional
+    - action: kanban_card        # the same thread also becomes a card
+      board: corp-tickets        # board slug in aa-kanban
+      list: Backlog              # optional; else the first list
+  "987654321098765432":          # #suggestions
+    - action: github_discussion
+      repo: mbroekman/aa-industry
+      category: Ideas            # optional; else the first category
+  "111111111111111111":          # #ticket-intake
+    - action: kanban_card
+      board: corp-tickets
+      labels: [Discord]          # optional; existing labels only
+      team: IT                   # optional; Kanban team name

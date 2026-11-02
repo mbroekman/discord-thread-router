@@ -68,3 +68,7 @@ dist/
 .mypy_cache/
 .ruff_cache/
 
+
+# Deployment-specific channel rules (see rules.example.yaml)
+rules.yaml
+config/rules.yaml
