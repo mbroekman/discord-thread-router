@@ -41,6 +41,7 @@ channels:
       list: Backlog              # optional; else the first list
       labels: [Discord]          # optional; existing labels only
       team: IT                   # optional; Kanban team name
+      allow_bot_threads: false   # optional; true = also threads that a bot opens
   "987654321098765432":          # #suggestions
     - action: github_discussion
       repo: mbroekman/aa-industry
@@ -55,6 +56,9 @@ channels:
 
 - Threads in channels without a rule.
 - Threads opened by a bot. aa-kanban opens ticket threads itself, so this prevents a card → thread → card loop.
+  - To act on a bot's threads anyway, set `allow_bot_threads: true` on the action. Example: the Authlink bot opens a private recruit thread with "@recruit is hunting for a recruiter!".
+  - For such a thread, the first person the bot's message mentions becomes the author (the recruit), not the bot.
+- The log says why a thread in a watched channel was skipped.
 - A second event for the same thread. aa-kanban also returns the existing card instead of making a second one.
 
 ## Discord setup

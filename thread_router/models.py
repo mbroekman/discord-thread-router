@@ -16,6 +16,7 @@ class ThreadInfo:
     author_id: int | None
     jump_url: str
     tags: tuple[str, ...] = ()
+    from_bot: bool = False  # the starter message was posted by a bot
 
 
 @dataclass(frozen=True)

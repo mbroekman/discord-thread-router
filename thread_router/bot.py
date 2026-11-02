@@ -43,6 +43,20 @@ async def starter_message(thread: discord.Thread) -> discord.Message | None:
     return None
 
 
+def thread_author(message: discord.Message | None) -> tuple[str, int | None]:
+    """Who the thread is about: the poster, or for a bot's message the first person it mentions.
+
+    The Authlink bot, for example, opens a recruit thread with "@recruit is hunting for a recruiter!".
+    """
+    if message is None:
+        return "Unknown", None
+    if message.author.bot:
+        person = next((m for m in message.mentions if not m.bot), None)
+        if person:
+            return person.display_name, person.id
+    return message.author.display_name, message.author.id
+
+
 class ThreadRouterBot(discord.Client):
     def __init__(self, rules: RulesStore, env: dict[str, str]):
         intents = discord.Intents.default()
@@ -87,17 +101,17 @@ class ThreadRouterBot(discord.Client):
         if self.user and thread.owner_id == self.user.id:
             return
         message = await starter_message(thread)
-        if message and message.author.bot:
-            return  # e.g. ticket threads that aa-kanban opens itself
+        author_name, author_id = thread_author(message)
         info = ThreadInfo(
             thread_id=thread.id,
             channel_id=thread.parent_id,
             title=thread.name,
-            content=message.content if message else "",
-            author_name=message.author.display_name if message else "Unknown",
-            author_id=message.author.id if message else thread.owner_id,
+            content=message.clean_content if message else "",
+            author_name=author_name,
+            author_id=author_id if message else thread.owner_id,
             jump_url=thread.jump_url,
             tags=tuple(tag.name for tag in getattr(thread, "applied_tags", [])),
+            from_bot=bool(message and message.author.bot),
         )
         results = await route(info, rules, self.actions)
         if results:

@@ -10,9 +10,21 @@ logger = logging.getLogger(__name__)
 
 
 async def route(thread: ThreadInfo, rules: Rules, actions: dict[str, Action]) -> list[Result]:
-    """Results of every action for this thread's channel; empty if the channel has no rule."""
+    """Results of every action for this thread's channel; empty if the channel has no rule.
+
+    A thread that a bot opened only runs actions with `allow_bot_threads: true`, so threads
+    that aa-kanban opens itself cannot loop back into new cards.
+    """
     results = []
     for spec in rules.get(thread.channel_id, []):
+        if thread.from_bot and not spec.options.get("allow_bot_threads"):
+            logger.info(
+                "Thread %s in channel %s: opened by a bot, %s skipped (no allow_bot_threads)",
+                thread.thread_id,
+                thread.channel_id,
+                spec.action,
+            )
+            continue
         try:
             result = await actions[spec.action].handle(thread, spec.options)
         except Exception:  # an action must never take the bot down

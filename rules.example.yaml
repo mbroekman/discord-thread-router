@@ -18,3 +18,4 @@ channels:
       board: corp-tickets
       labels: [Discord]          # optional; existing labels only
       team: IT                   # optional; Kanban team name
+      allow_bot_threads: false   # optional; true = also threads that a bot opens

@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+### Added
+
+- **`allow_bot_threads` option:** an action can also run for threads that a bot opens, such as the Authlink bot's recruit threads. The first person the bot's message mentions becomes the author. Without the option, bot threads are still skipped.
+- **Skip reason in the log:** a skipped thread in a watched channel is logged with the reason.
+- **Readable mentions:** the card text shows `@name` instead of raw Discord mention codes.
+
 ### Fixed
 
 - **Install with pip:** `pip install .` failed because setuptools also found `config/` and `backlog/`. Only `thread_router` is packaged now.
