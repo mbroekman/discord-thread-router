@@ -58,4 +58,5 @@ class KanbanCard:
             message = f"Already on the board as card #{body.get('card_id')}."
         if body.get("skipped"):
             message += f" Not found and skipped: {', '.join(body['skipped'])}."
-        return Result(True, message, body.get("card_url"))
+        # No card link: the thread can hold members without access to the board.
+        return Result(True, message)

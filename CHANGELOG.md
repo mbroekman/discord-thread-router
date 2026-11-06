@@ -8,6 +8,10 @@
 - **Skip reason in the log:** a skipped thread in a watched channel is logged with the reason.
 - **Readable mentions:** the card text shows `@name` instead of raw Discord mention codes.
 
+### Changed
+
+- **No card link in the thread (TASK-7):** the reply for a kanban card shows the card number and board, but no link. A thread can hold Discord members who have no access to the board.
+
 ### Fixed
 
 - **Install with pip:** `pip install .` failed because setuptools also found `config/` and `backlog/`. Only `thread_router` is packaged now.

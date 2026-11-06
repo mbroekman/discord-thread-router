@@ -2,7 +2,7 @@
 
 <img src="assets/logo.png" alt="Discord Thread Router logo" width="128">
 
-A Discord bot that watches chosen channels. When someone opens a thread there, the bot runs the actions you set for that channel and replies in the thread with a link to the result.
+A Discord bot that watches chosen channels. When someone opens a thread there, the bot runs the actions you set for that channel and replies in the thread with the result: a link for GitHub issues and discussions, and only the card number for kanban cards, because not everyone in the thread may have access to the board.
 
 | Action | Result |
 |---|---|

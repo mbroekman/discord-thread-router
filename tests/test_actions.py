@@ -57,7 +57,8 @@ async def test_kanban_card_posts_thread_to_intake(thread, mock_http):
     client, rec = mock_http(lambda r: httpx.Response(201, json=reply))
     action = KanbanCard(client, "https://auth/kanban", "key")
     result = await action.handle(thread, {"board": "t", "list": "Backlog", "labels": ["X"], "team": "IT"})
-    assert result.ok and result.url == reply["card_url"]
+    assert result.ok and result.url is None
+    assert reply["card_url"] not in result.message
     assert "#12" in result.message and "label X" in result.message
     assert rec.requests[0].url == "https://auth/kanban/api/intake/discord-thread/"
     assert rec.requests[0].headers["Authorization"] == "Bearer key"
